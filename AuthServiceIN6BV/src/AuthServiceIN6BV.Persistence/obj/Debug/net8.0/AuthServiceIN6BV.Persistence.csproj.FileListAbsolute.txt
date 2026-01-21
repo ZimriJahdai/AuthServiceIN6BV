@@ -1,0 +1,17 @@
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.deps.json
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.dll
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.pdb
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Application.dll
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Domain.dll
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Domain.pdb
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\bin\Debug\net8.0\AuthServiceIN6BV.Application.pdb
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.csproj.AssemblyReference.cache
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.AssemblyInfoInputs.cache
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.AssemblyInfo.cs
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServ.9FF9A057.Up2Date
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.dll
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\refint\AuthServiceIN6BV.Persistence.dll
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\AuthServiceIN6BV.Persistence.pdb
+C:\Users\Informatica\Desktop\AuthServiceIN6BV\src\AuthServiceIN6BV.Persistence\obj\Debug\net8.0\ref\AuthServiceIN6BV.Persistence.dll
