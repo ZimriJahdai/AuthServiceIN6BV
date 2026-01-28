@@ -1,4 +1,4 @@
-namespace AuthServiceIN6BV.Application.interfaces;
+namespace AuthServiceIN6BV.Application.Interfaces;
 
 public interface IFileData
 {

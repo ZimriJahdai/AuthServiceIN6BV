@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-namespace AuthServiceIN6BV.Domain.Etities;
+
+namespace AuthServiceIN6BV.Domain.Entities;
 
 public class UserRole
 {
@@ -16,21 +17,12 @@ public class UserRole
     public string RoleId { get; set; } = string.Empty;
 
     [Required]
-    public UserRole User { get; set; } = null!;
-
+    public User User { get; set; } = null!;
 
     [Required]
     public Role Role { get; set; } = null!;
 
+    public DateTime CreatedAt { get; set; }
 
-    public DateTime CreateAt { get; set;}
-
-
-    public  DateTime UpdateAt { get; set;}
-
-
-
-
-
-
+    public DateTime UpdatedAt { get; set; }
 }
