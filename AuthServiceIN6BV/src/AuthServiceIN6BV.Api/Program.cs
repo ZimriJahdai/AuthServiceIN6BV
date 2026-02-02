@@ -1,9 +1,32 @@
+using AuthServiceIN6BV.Persistence.Data;
+using AuthServiceIN6BV.Api.Extensions;
+using AuthServiceIN6BV.Api.ModelBinders;
+using Serilog;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Host.UseSerilog((context, services, LoggerConfiguration) =>
+LoggerConfiguration
+.ReadFrom.Configuration(context.Configuration)
+.ReadFrom.Services(services));
+
+builder.Services.AddControllers(options =>
+{
+    options.ModelBinderProviders.Insert(0, new FileDataModelBinderProvider());
+
+})
+.AddJsonOptions(o =>
+{
+    o.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+});
+
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
