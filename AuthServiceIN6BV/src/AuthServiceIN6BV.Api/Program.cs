@@ -114,6 +114,7 @@ using (var scope = app.Services.CreateScope())
     {
         logger.LogError(ex, "An error occurred while initializing the database");
         throw; 
+        
     }
 }
 

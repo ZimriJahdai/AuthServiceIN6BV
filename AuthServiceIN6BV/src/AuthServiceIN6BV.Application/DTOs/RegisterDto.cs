@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using AuthServiceIN6BV.Application.interfaces;
+using AuthServiceIN6BV.Application.Interfaces;
 
 public class RegisterDto
 {

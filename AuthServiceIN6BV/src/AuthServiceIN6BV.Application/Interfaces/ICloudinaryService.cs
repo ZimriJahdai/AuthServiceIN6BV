@@ -1,4 +1,4 @@
-using AuthServiceIN6BV.Application.interfaces;
+using AuthServiceIN6BV.Application.Interfaces;
 
 namespace AuthServiceIN6BV.Application.Interfaces;
 

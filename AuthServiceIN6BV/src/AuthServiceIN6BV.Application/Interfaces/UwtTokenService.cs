@@ -1,4 +1,4 @@
-using AuthServiceIN6BV.Domain.Etities;
+using AuthServiceIN6BV.Domain.Entities;
 
 namespace AuthServiceIN6BV.Application.Interfaces;
 
