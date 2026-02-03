@@ -6,9 +6,13 @@ services:
     container_name: authserviceIN6BV_postgres
     restart: always
     environment:
-      POSTGRES_DB: KinalSportsIN6CV
+      POSTGRES_DB: KinalSportsIN6BV
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: admin
+      POSTGRES_PASSWORD: jesucristo123
     ports:
     - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgressql/data
 
+volumes:
+  postgres_data:
