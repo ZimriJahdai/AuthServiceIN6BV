@@ -1,0 +1,141 @@
+[2026-02-04 16:09:06 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-04 16:09:10 ERR] An error occurred while initializing the database {"SourceContext":"Program"}
+Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5435
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.UnpooledDataSource.Get(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlDatabaseCreator.Exists(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlDatabaseCreator.Exists(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabaseCreator.EnsureCreatedAsync(CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Program.cs:line 141
+[2026-02-04 16:09:51 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-04 16:09:52 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-04 16:09:52 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-04 16:09:52 INF] AuthService API is running at http://localhost:5257. Health endpoint: http://localhost:5257/health {"SourceContext":"Program"}
+[2026-02-04 17:03:26 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ486D7PEV8:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEV8"}
+[2026-02-04 17:03:26 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ486D7PEV8:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEV8"}
+System.InvalidOperationException: Default role 'USER_ROLE' not found. Ensure seeding runs before registration.
+   at AuthServiceIN6BV.Application.Services.AuthServices.RegisterAsync(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthServices.cs:line 85
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 42
+   at lambda_method408(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-04 17:03:26 INF] HTTP POST /api/v1/auth/register responded 404 in 304.3027 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ486D7PEV8:00000001","ConnectionId":"0HNJ486D7PEV8"}
+[2026-02-04 17:04:49 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ486D7PEVA:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEVA"}
+System.InvalidOperationException: Default role 'USER_ROLE' not found. Ensure seeding runs before registration.
+   at AuthServiceIN6BV.Application.Services.AuthServices.RegisterAsync(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthServices.cs:line 85
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 42
+   at lambda_method408(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-04 17:04:49 INF] HTTP POST /api/v1/auth/register responded 404 in 60.3003 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ486D7PEVA:00000001","ConnectionId":"0HNJ486D7PEVA"}
+[2026-02-04 17:04:50 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ486D7PEVA:00000002","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEVA"}
+System.InvalidOperationException: Default role 'USER_ROLE' not found. Ensure seeding runs before registration.
+   at AuthServiceIN6BV.Application.Services.AuthServices.RegisterAsync(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthServices.cs:line 85
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 42
+   at lambda_method408(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-04 17:04:50 INF] HTTP POST /api/v1/auth/register responded 404 in 15.4354 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ486D7PEVA:00000002","ConnectionId":"0HNJ486D7PEVA"}
+[2026-02-04 17:10:11 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ486D7PEVC:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEVC"}
+System.InvalidOperationException: Default role 'USER_ROLE' not found. Ensure seeding runs before registration.
+   at AuthServiceIN6BV.Application.Services.AuthServices.RegisterAsync(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthServices.cs:line 85
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 42
+   at lambda_method408(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-04 17:10:11 INF] HTTP POST /api/v1/auth/register responded 404 in 16.2832 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ486D7PEVC:00000001","ConnectionId":"0HNJ486D7PEVC"}
+[2026-02-04 17:10:59 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ486D7PEVC:00000002","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEVC"}
+System.InvalidOperationException: Default role 'USER_ROLE' not found. Ensure seeding runs before registration.
+   at AuthServiceIN6BV.Application.Services.AuthServices.RegisterAsync(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthServices.cs:line 85
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 42
+   at lambda_method408(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-04 17:10:59 INF] HTTP POST /api/v1/auth/register responded 404 in 7.8351 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ486D7PEVC:00000002","ConnectionId":"0HNJ486D7PEVC"}
+[2026-02-04 17:11:00 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ486D7PEVC:00000003","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ486D7PEVC"}
+System.InvalidOperationException: Default role 'USER_ROLE' not found. Ensure seeding runs before registration.
+   at AuthServiceIN6BV.Application.Services.AuthServices.RegisterAsync(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthServices.cs:line 85
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 42
+   at lambda_method408(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Informatica\Desktop\AuthServiceIN6BV\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-04 17:11:00 INF] HTTP POST /api/v1/auth/register responded 404 in 12.8510 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ486D7PEVC:00000003","ConnectionId":"0HNJ486D7PEVC"}

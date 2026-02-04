@@ -15,7 +15,7 @@ using AuthService.Application.Services;
 
 namespace AuthServiceIN6BV.Application.Services;
 
-public class AuthService(
+public class AuthServices(
     IUserRepository userRepository,
     IRoleRepository roleRepository,
     IPasswordHashService passwordHashService,
@@ -23,7 +23,7 @@ public class AuthService(
     ICloudinaryService cloudinaryService,
     IEmailService emailService,
     IConfiguration configuration,
-    ILogger<AuthService> logger) : IAuthService
+    ILogger<AuthServices> logger) : IAuthService
 {
     private readonly ICloudinaryService _cloudinaryService = cloudinaryService;
     public async Task<RegisterResponseDto> RegisterAsync(RegisterDto registerDto)
