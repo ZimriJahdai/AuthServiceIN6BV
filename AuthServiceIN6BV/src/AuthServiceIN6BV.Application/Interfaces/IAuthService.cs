@@ -3,6 +3,8 @@ using AuthServiceIN6BV.Application.DTOs.Email;
 
 namespace AuthServiceIN6BV.Application.Interfaces;
 
+//JESUCRISTO VIVE
+
 public interface IAuthService
 {
     
