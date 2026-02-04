@@ -1,6 +1,6 @@
 using System;
 using Microsoft.Extensions.Logging;
-namespace AuthService.Application.Extensions;
+namespace AuthServiceIN6BV.Application.Extensions;
  
 public static partial class LoggerExtension
 {

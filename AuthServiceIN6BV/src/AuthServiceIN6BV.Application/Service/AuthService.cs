@@ -10,6 +10,8 @@ using AuthServiceIN6BV.Domain.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using AuthServiceIN6BV.Application.DTOs.Email;
+using AuthService.Application.Exception;
+using AuthService.Application.Services;
 
 namespace AuthServiceIN6BV.Application.Services;
 
@@ -34,7 +36,7 @@ public class AuthService(
         }
 
         // Verificar si el username ya existe
-        if (await userRepository.ExistsByUsernameAsync(registerDto.Username))
+        if (await userRepository.ExistsByUsernameAsync(registerDto.UserName))
         {
             logger.LogRegistrationWithExistingUsername();
             throw new BusinessException(ErrorCodes.USERNAME_ALREADY_EXISTS, "Username already exists");
@@ -45,7 +47,7 @@ public class AuthService(
 
         if (registerDto.ProfilePicture != null && registerDto.ProfilePicture.Size > 0)
         {
-            var (isValid, errorMessage) = FileValidator.ValidateImage(registerDto.ProfilePicture);
+            var (isValid, errorMessage) = FileValidator.validateImage(registerDto.ProfilePicture);
             if (!isValid)
             {
                 logger.LogWarning($"File validation failed: {errorMessage}");
@@ -69,7 +71,7 @@ public class AuthService(
         }
 
         // Crear nuevo usuario y entidades relacionadas
-        var emailVerificationToken = TokenGenerator.GenerateEmailVerificationToken();
+        var emailVerificationToken = TokenGeneratorService.GenerateEmailVerificationToken();
 
         var userId = UuidGenerator.GenerateUserId();
         var userProfileId = UuidGenerator.GenerateUserId();
@@ -88,7 +90,7 @@ public class AuthService(
             Id = userId,
             Name = registerDto.Name,
             Surname = registerDto.Surname,
-            Username = registerDto.Username,
+            UserName = registerDto.UserName,
             Email = registerDto.Email.ToLowerInvariant(),
             Password = passwordHashService.HashPassword(registerDto.Password),
             Status = false,
@@ -121,14 +123,14 @@ public class AuthService(
         // Guardar usuario y entidades relacionadas
         var createdUser = await userRepository.CreateAsync(user);
 
-        logger.LogUserRegistered(createdUser.Username);
+        logger.LogUserRegistered(createdUser.UserName);
 
         // Enviar email de verificación en background
         _ = Task.Run(async () =>
         {
             try
             {
-                await emailService.SendEmailVerificationAsync(createdUser.Email, createdUser.Username, emailVerificationToken);
+                await emailService.SendEmailVerificationAsync(createdUser.Email, createdUser.UserName, emailVerificationToken);
                 logger.LogInformation("Verification email sent");
             }
             catch (Exception ex)
@@ -197,7 +199,7 @@ public class AuthService(
             Message = "Login exitoso",
             Token = token,
             UserDetails = MapToUserDetailsDto(user),
-            ExpiresAt = DateTime.UtcNow.AddMinutes(expiryMinutes)
+            ExpiresdAt = DateTime.UtcNow.AddMinutes(expiryMinutes)
         };
     }
 
@@ -209,7 +211,7 @@ public class AuthService(
             Id = user.Id,
             Name = user.Name,
             Surname = user.Surname,
-            Username = user.Username,
+            UserName = user.UserName,
             Email = user.Email,
             ProfilePicture = _cloudinaryService.GetFullImageUrl(user.UserProfile?.ProfilePicture ?? string.Empty),
             Phone = user.UserProfile?.Phone ?? string.Empty,
@@ -226,7 +228,7 @@ public class AuthService(
         return new UserDetailsDto
         {
             Id = user.Id,
-            Username = user.Username,
+            Username = user.UserName,
             ProfilePicture = _cloudinaryService.GetFullImageUrl(user.UserProfile?.ProfilePicture ?? string.Empty),
             Role = user.UserRoles.FirstOrDefault()?.Role?.Name ?? RoleConstants.USER_ROLE
         };
@@ -254,14 +256,14 @@ public class AuthService(
         // Enviar email de bienvenida
         try
         {
-            await emailService.SendWelcomeEmailAsync(user.Email, user.Username);
+            await emailService.SendWelcomeEmailAsync(user.Email, user.UserName);
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Failed to send welcome email to {Email}", user.Email);
         }
 
-        logger.LogInformation("Email verified successfully for user {Username}", user.Username);
+        logger.LogInformation("Email verified successfully for user {Username}", user.UserName);
 
         return new EmailResponseDto
         {
@@ -299,7 +301,7 @@ public class AuthService(
         }
 
         // Generar nuevo token
-        var newToken = TokenGenerator.GenerateEmailVerificationToken();
+        var newToken = TokenGeneratorService.GenerateEmailVerificationToken();
         user.UserEmail.EmailVerificationToken = newToken;
         user.UserEmail.EmailVerificationTokenExpiry = DateTime.UtcNow.AddHours(24);
 
@@ -308,7 +310,7 @@ public class AuthService(
         // Enviar email
         try
         {
-            await emailService.SendEmailVerificationAsync(user.Email, user.Username, newToken);
+            await emailService.SendEmailVerificationAsync(user.Email, user.UserName, newToken);
             return new EmailResponseDto
             {
                 Success = true,
@@ -343,20 +345,20 @@ public class AuthService(
         }
 
         // Generar token de reset
-        var resetToken = TokenGenerator.GeneratePasswordResetToken();
+        var resetToken = TokenGeneratorService.GeneratePasswordResetToken();
 
         if (user.UserPasswordReset == null)
         {
             user.UserPasswordReset = new UserPasswordReset
             {
                 UserId = user.Id,
-                PasswordResetToken = resetToken,
+                UserPasswordResetToken = resetToken,
                 PasswordResetTokenExpiry = DateTime.UtcNow.AddHours(1)
             };
         }
         else
         {
-            user.UserPasswordReset.PasswordResetToken = resetToken;
+            user.UserPasswordReset.UserPasswordResetToken= resetToken;
             user.UserPasswordReset.PasswordResetTokenExpiry = DateTime.UtcNow.AddHours(1); // 1 hora para resetear
         }
 
@@ -365,7 +367,7 @@ public class AuthService(
         // Enviar email
         try
         {
-            await emailService.SendPasswordResetAsync(user.Email, user.Username, resetToken);
+            await emailService.SendPasswordResetAsync(user.Email, user.UserName, resetToken);
             logger.LogInformation("Password reset email sent to {Email}", user.Email);
         }
         catch (Exception ex)
@@ -396,12 +398,12 @@ public class AuthService(
 
         // Actualizar contraseña
         user.Password = passwordHashService.HashPassword(resetPasswordDto.NewPassword);
-        user.UserPasswordReset.PasswordResetToken = null;
+        user.UserPasswordReset.UserPasswordResetToken = null;
         user.UserPasswordReset.PasswordResetTokenExpiry = null;
 
         await userRepository.UpdateAsync(user);
 
-        logger.LogInformation("Password reset successfully for user {Username}", user.Username);
+        logger.LogInformation("Password reset successfully for user {Username}", user.UserName);
 
         return new EmailResponseDto
         {

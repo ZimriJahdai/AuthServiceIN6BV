@@ -16,7 +16,7 @@ public interface IAuthService
 
     Task<EmailResponseDto> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
 
-    Task<UserResponseDto> GetUserByIdAsync(string userId);
+    Task<UserResponseDto?> GetUserByIdAsync(string userId);
 
 
 }

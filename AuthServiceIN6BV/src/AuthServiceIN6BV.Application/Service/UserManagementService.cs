@@ -49,7 +49,7 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
             Id = user.Id,
             Name = user.Name,
             Surname = user.Surname,
-            Username = user.Username,
+            UserName = user.UserName,
             Email = user.Email,
             ProfilePicture = cloudinary.GetFullImageUrl(user.UserProfile?.ProfilePicture ?? string.Empty),
             Phone = user.UserProfile?.Phone ?? string.Empty,
@@ -61,7 +61,7 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
         };
     }
 
-    public async Task<IReadOnlyList<string>> GetUserRolesAsync(string userId)
+    public async Task<IReadOnlyList<string>> GetUserRoleAsync(string userId)
     {
         var roleNames = await roles.GetUserRoleNamesAsync(userId);
         return roleNames;
@@ -76,7 +76,7 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
             Id = u.Id,
             Name = u.Name,
             Surname = u.Surname,
-            Username = u.Username,
+            UserName = u.UserName,
             Email = u.Email,
             ProfilePicture = cloudinary.GetFullImageUrl(u.UserProfile?.ProfilePicture ?? string.Empty),
             Phone = u.UserProfile?.Phone ?? string.Empty,
